@@ -1,6 +1,6 @@
 <?php
 session_start();
-$page_title = "Monitor login | Gear Out";
+$page_title = "Monitor login | Book Drop";
 include('includes/header.php');
 include('includes/nav.php');
 ?>
@@ -31,7 +31,7 @@ include('includes/nav.php');
                     <button type="submit" class="btn btn-primary" name="login_btn">Log in</button>
                 </div>
             </form>
-            <p class="text-muted">Demo account: monitor@school.nz / password123</p>
+            <p class="text-muted">Demo account: zachary.lemmon@my.rongotai.school.nz / password123</p>
         </div>
         <div class="col-sm-3"></div>
     </div>

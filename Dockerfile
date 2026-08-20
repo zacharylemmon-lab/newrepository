@@ -5,3 +5,5 @@ FROM php:8.2-apache
 # or connection errors in a PHP + MySQL Codespace — installing it here,
 # once, at build time, avoids it entirely.
 RUN docker-php-ext-install pdo pdo_mysql mysqli
+
+RUN apt-get update && apt-get install -y default-mysql-client git && rm -rf /var/lib/apt/lists/*

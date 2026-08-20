@@ -9,6 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $item     = trim($_POST['item_name'] ?? '');
+$author   = trim($_POST['author'] ?? '');
 $borrower = trim($_POST['borrower_name'] ?? '');
 $due      = $_POST['due_back'] ?? '';
 $today    = date('Y-m-d');
@@ -23,19 +24,23 @@ if ($borrower === '') {
 if ($due === '' || $due < $today) {
     $errors[] = 'Due back date must be today or later.';
 }
+if ($author === '') {
+    $errors[] = 'Please enter an author name.';
+}
 
 if ($errors) {
     $_SESSION['borrow_errors'] = $errors;
-    $_SESSION['borrow_old']    = ['item_name' => $item, 'borrower_name' => $borrower, 'due_back' => $due];
+    $_SESSION['borrow_old']    = ['item_name' => $item, 'author' => $author, 'borrower_name' => $borrower, 'due_back' => $due];
     header('Location: borrow.php');
     exit;
 }
 
-$sql = "INSERT INTO loans (item_name, borrower_name, borrowed_date, due_back, logged_by)
-        VALUES (:item, :borrower, :borrowed, :due, :logged_by)";
+$sql = "INSERT INTO loans (item_name, author, borrower_name, borrowed_date, due_back, logged_by)
+        VALUES (:item, :author, :borrower, :borrowed, :due, :logged_by)";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([
     ':item'      => $item,
+    ':author'    => $author,
     ':borrower'  => $borrower,
     ':borrowed'  => $today,
     ':due'       => $due,

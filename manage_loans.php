@@ -3,7 +3,7 @@ session_start();
 require('includes/auth_check.php');
 require('includes/conn_1dt.php');
 
-$page_title = "Manage loans | Gear Out";
+$page_title = "Manage loans | Book Drop";
 
 // Join to monitors so we can show who logged each loan.
 $stmt = $pdo->query(
@@ -31,7 +31,7 @@ include('includes/nav.php');
             <div class="pb-4">
                 <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search...">
                 <select class="form-select mt-2" id="columnSelect" onchange="myFunction()">
-                    <option value="0">Item</option>
+                    <option value="0">Book</option>
                     <option value="1">Borrower</option>
                     <option value="2">Due back</option>
                     <option value="3">Status</option>
@@ -41,7 +41,8 @@ include('includes/nav.php');
             <table class="table table-hover" id="myTable">
                 <thead>
                     <tr>
-                        <th scope="col">Item</th>
+                        <th scope="col">Book</th>
+                        <th scope="col">Author</th>
                         <th scope="col">Borrower</th>
                         <th scope="col">Due back</th>
                         <th scope="col">Status</th>
@@ -64,6 +65,7 @@ include('includes/nav.php');
                         ?>
                         <tr class="<?= $overdue ? 'table-danger' : '' ?>">
                             <td><?= htmlspecialchars($loan['item_name']) ?></td>
+                            <td><?= htmlspecialchars($loan['author']) ?></td>
                             <td><?= htmlspecialchars($loan['borrower_name']) ?></td>
                             <td><?= htmlspecialchars($loan['due_back']) ?></td>
                             <td><?= $status ?></td>

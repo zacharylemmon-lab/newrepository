@@ -1,7 +1,23 @@
-FROM php:8.2-apache
+<?php
+// Database connection for Gear Out — PDO, not mysqli.
+// Named to match the class template convention (conn_1dt.php),
+// but built with PDO + prepared statements throughout the rest of the site.
+$host = 'db';
+$dbname = 'gearout';
+$user = 'root';
+$pass = getenv('DB_ROOT_PASSWORD');
+$charset = 'utf8mb4';
 
-# pdo_mysql isn't enabled in the base php:8.2-apache image by default.
-# This is the single most common cause of "Call to undefined function"
-# or connection errors in a PHP + MySQL Codespace — installing it here,
-# once, at build time, avoids it entirely.
-RUN docker-php-ext-install pdo pdo_mysql mysqli
+$dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
+
+$options = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => false,
+];
+
+try {
+    $pdo = new PDO($dsn, $user, $pass, $options);
+} catch (PDOException $e) {
+    throw new PDOException($e->getMessage(), (int) $e->getCode());
+}

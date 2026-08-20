@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS monitors (
 CREATE TABLE IF NOT EXISTS loans (
     id             INT AUTO_INCREMENT PRIMARY KEY,
     item_name      VARCHAR(50)  NOT NULL,
+    author         VARCHAR(250) NOT NULL,
     borrower_name  VARCHAR(50)  NOT NULL,
     borrowed_date  DATE         NOT NULL,
     due_back       DATE         NOT NULL,
@@ -28,6 +29,6 @@ INSERT INTO monitors (firstname, lastname, email, password) VALUES
 
 -- A few sample loans so view_loans.php / manage_loans.php show something immediately.
 INSERT INTO loans (item_name, borrower_name, borrowed_date, due_back, returned_date, logged_by) VALUES
-    ('Hockey stick',        'Aroha T.', '2026-07-20', '2026-07-27', NULL,         1),
+    ('Hockey Stick',        'Aroha T.', '2026-07-20', '2026-07-27', NULL,         1),
     ('Netball bibs (set)',  'Kane M.',  '2026-07-15', '2026-07-16', NULL,         1), -- deliberately overdue
     ('Soccer ball',         'Reo H.',   '2026-07-18', '2026-07-19', '2026-07-19', 1);

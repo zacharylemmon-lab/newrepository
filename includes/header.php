@@ -1,33 +1,17 @@
-<?php
-session_start();
-require('conn_1dt.php');
+<!doctype html>
+<html lang="en">
 
-if (isset($_POST['login_btn'])) {
-    $email = trim($_POST['email'] ?? '');
-    $pwd   = $_POST['pwd'] ?? '';
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><?php echo htmlspecialchars($page_title); ?></title>
 
-    if ($email === '' || $pwd === '') {
-        header('Location: ../login.php?error=empty_fields');
-        exit;
-    }
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
-    $stmt = $pdo->prepare("SELECT * FROM monitors WHERE email = :email");
-    $stmt->execute([':email' => $email]);
-    $monitor = $stmt->fetch();
+    <link rel="stylesheet" href="css/style.css" />
 
-    // password_verify checks the submitted password against the hash
-    // stored in the database — the plain password is never stored or compared directly.
-    if ($monitor && password_verify($pwd, $monitor['password'])) {
-        $_SESSION['id']        = $monitor['id'];
-        $_SESSION['firstname'] = $monitor['firstname'];
-        $_SESSION['lastname']  = $monitor['lastname'];
-        header('Location: ../control_panel.php');
-        exit;
-    }
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+</head>
 
-    header('Location: ../login.php?error=invalid_credentials');
-    exit;
-}
-
-header('Location: ../login.php');
-exit;
+<body>

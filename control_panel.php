@@ -6,7 +6,7 @@ session_start();
 require('includes/auth_check.php');
 
 // Declare page title variable
-$page_title = "Control panel | Gear Out";
+$page_title = "Control panel | Book Drop";
 
 // Call header and navigation files
 include('includes/header.php');

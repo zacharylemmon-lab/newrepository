@@ -1,6 +1,6 @@
 <?php
 session_start();
-$page_title = "Current loans | Gear Out";
+$page_title = "Current loans | Book Drop";
 require('includes/conn_1dt.php');
 
 // Anyone can see this page — no auth_check here. Only logging or
@@ -12,12 +12,13 @@ $today = date('Y-m-d');
 include('includes/header.php');
 include('includes/nav.php');
 ?>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-1"></div>
         <div class="col-sm-10">
             <h1 class="pt-5 pb-4 text-center">Current loans</h1>
-
+            <p style="color: #5e646d;"> Shows current loans that are unreturned. </p>
             <?php if (!$loans): ?>
                 <p class="text-center">Nothing is currently out.</p>
             <?php else: ?>
@@ -27,7 +28,8 @@ include('includes/nav.php');
                 <table class="table table-hover" id="myTable">
                     <thead>
                         <tr>
-                            <th scope="col">Item</th>
+                            <th scope="col">Book</th>
+                            <th scope="col">Author</th>
                             <th scope="col">Borrower</th>
                             <th scope="col">Due back</th>
                             <th scope="col">Status</th>
@@ -38,6 +40,7 @@ include('includes/nav.php');
                             <?php $overdue = $loan['due_back'] < $today; ?>
                             <tr class="<?= $overdue ? 'table-danger' : '' ?>">
                                 <td><?= htmlspecialchars($loan['item_name']) ?></td>
+                                <td><?= htmlspecialchars($loan['author']) ?></td>
                                 <td><?= htmlspecialchars($loan['borrower_name']) ?></td>
                                 <td><?= htmlspecialchars($loan['due_back']) ?></td>
                                 <td>

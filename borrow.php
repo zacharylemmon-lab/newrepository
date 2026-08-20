@@ -2,7 +2,7 @@
 session_start();
 require('includes/auth_check.php');
 
-$page_title = "Log a loan | Gear Out";
+$page_title = "Log a loan | Book Drop";
 
 // If save_loan.php redirected back here with errors, read them once.
 $errors = $_SESSION['borrow_errors'] ?? [];
@@ -17,7 +17,8 @@ include('includes/nav.php');
         <div class="col-sm-3"></div>
         <div class="col-sm-6">
             <h2 class="pt-5">Log a loan</h2>
-
+            <p style="color: #5e646d;"> Standard form is Name S. with the S. being the surname </p>
+            
             <?php if ($errors): ?>
             <div class="alert alert-danger" role="alert">
                 <ul class="mb-0">
@@ -30,9 +31,14 @@ include('includes/nav.php');
 
             <form action="save_loan.php" method="POST">
                 <div class="mb-3">
-                    <label for="item_name" class="form-label">Item</label>
+                    <label for="item_name" class="form-label">Book</label>
                     <input type="text" class="form-control" id="item_name" name="item_name"
                            value="<?= htmlspecialchars($old['item_name'] ?? '') ?>">
+                </div>
+                <div class="mb-3">
+                    <label for="author" class="form-label">Author</label>
+                    <input type="text" class="form-control" id="author" name="author"
+                           value="<?= htmlspecialchars($old['author'] ?? '') ?>">
                 </div>
                 <div class="mb-3">
                     <label for="borrower_name" class="form-label">Borrower</label>

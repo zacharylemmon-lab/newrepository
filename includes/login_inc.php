@@ -1,12 +1,33 @@
-<footer class="site-footer mt-5 text-center">
-    <div class="card-footer text-body-secondary py-3">
-        Gear Out — PE equipment loan tracker
-    </div>
-</footer>
+<?php
+session_start();
+require('conn_1dt.php');
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
-</script>
-</body>
+if (isset($_POST['login_btn'])) {
+    $email = trim($_POST['email'] ?? '');
+    $pwd   = $_POST['pwd'] ?? '';
 
-</html>
+    if ($email === '' || $pwd === '') {
+        header('Location: ../login.php?error=empty_fields');
+        exit;
+    }
+
+    $stmt = $pdo->prepare("SELECT * FROM monitors WHERE email = :email");
+    $stmt->execute([':email' => $email]);
+    $monitor = $stmt->fetch();
+
+    // password_verify checks the submitted password against the hash
+    // stored in the database — the plain password is never stored or compared directly.
+    if ($monitor && password_verify($pwd, $monitor['password'])) {
+        $_SESSION['id']        = $monitor['id'];
+        $_SESSION['firstname'] = $monitor['firstname'];
+        $_SESSION['lastname']  = $monitor['lastname'];
+        header('Location: ../control_panel.php');
+        exit;
+    }
+
+    header('Location: ../login.php?error=invalid_credentials');
+    exit;
+}
+
+header('Location: ../login.php');
+exit;

@@ -1,2 +1,2 @@
 # newrepository
-hopefuly this is fixing it
+hopefully this is fixing it
