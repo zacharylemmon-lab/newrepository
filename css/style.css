@@ -7,3 +7,8 @@ p {color:black; font-family: arial;font-size:16;}
 .pt-5 {color:black; font-family: arial;font-size:16;}
 
 .pt-4 {color:black; font-family: arial;font-size:16;}
+
+.parent-container {
+  display: flex;         /* Activates flexbox and aligns children horizontally */
+  flex-direction: row;   /* Optional: This is the default horizontal behavior */
+}

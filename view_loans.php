@@ -36,6 +36,26 @@ include('includes/nav.php');
                         </tr>
                     </thead>
                     <tbody>
+                <div class="parent-container">
+                    <div class ="col-4 text-center">
+                        <?php
+                            $sql = "SELECT * FROM loans WHERE returned_date IS NULL ORDER BY due_back ASC";
+                            echo "<p class='text-center'>Total Unreturned Loans: " . $pdo->query($sql)->rowCount() . "</p>";
+                        ?>
+                    </div>
+                    <div class ="col-4 text-center">
+                        <?php
+                            $sql = "SELECT * FROM loans WHERE due_back  < '$today' AND returned_date IS NULL ORDER BY due_back ASC";
+                            echo "<p class='text-center'>Overdue Loans: " . $pdo->query($sql)->rowCount() . "</p>";
+                        ?>
+                    </div>
+                    <div class ="col-4 text-center">
+                        <?php
+                            $sql = "SELECT * FROM loans WHERE due_back  > '$today' AND returned_date IS NULL ORDER BY due_back ASC";
+                            echo "<p class='text-center'>Due Back in the Future: " . $pdo->query($sql)->rowCount() . "</p>";
+                        ?>
+                    </div>
+                </div>
                         <?php foreach ($loans as $loan): ?>
                             <?php $overdue = $loan['due_back'] < $today; ?>
                             <tr class="<?= $overdue ? 'table-danger' : '' ?>">
