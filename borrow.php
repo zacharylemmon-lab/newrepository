@@ -17,7 +17,7 @@ include('includes/nav.php');
         <div class="col-sm-3"></div>
         <div class="col-sm-6">
             <h2 class="pt-5">Log a loan</h2>
-            <p style="color: #5e646d;"> Standard form is Name S. with the S. being the surname </p>
+            <p style="color: #5e646d;"> Please use First and Last names for Author and Borrower </p>
             
             <?php if ($errors): ?>
             <div class="alert alert-danger" role="alert">

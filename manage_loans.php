@@ -51,6 +51,25 @@ include('includes/nav.php');
                         <th scope="col">&nbsp;</th>
                     </tr>
                 </thead>
+                <div class="parent-container">
+                    <div class ="col-4 text-center">
+                        <?php
+                            $sql = "SELECT * FROM loans WHERE returned_date IS NULL ORDER BY due_back ASC";
+                            echo "<p class='text-center'>Total Unreturned Loans: " . $pdo->query($sql)->rowCount() . "</p>";
+                        ?>
+                    </div>
+                    <div class ="col-4 text-center">
+                        <?php
+                            $sql = "SELECT * FROM loans WHERE due_back  < '$today' AND returned_date IS NULL ORDER BY due_back ASC";
+                            echo "<p class='text-center'>Overdue Loans: " . $pdo->query($sql)->rowCount() . "</p>";
+                        ?>
+                    </div>
+                    <div class ="col-4 text-center">
+                        <?php
+                            $sql = "SELECT * FROM loans WHERE due_back  > '$today' AND returned_date IS NULL ORDER BY due_back ASC";
+                            echo "<p class='text-center'>Due Back in the Future: " . $pdo->query($sql)->rowCount() . "</p>";
+                        ?>
+                    </div>
                 <tbody>
                     <?php foreach ($loans as $loan): ?>
                         <?php
