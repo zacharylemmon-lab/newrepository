@@ -24,7 +24,7 @@ include('includes/nav.php');
             <li>Lets a signed-in monitor log a loan — book, borrower, and due-back date</li>
             <li>Shows anyone, monitor or staff, a live public list of what's currently out</li>
             <li>Flags anything overdue</li>
-            <li>Lets a monitor mark books as returned, or correct a mistaken entry</li>
+            <li>Lets a monitor mark books as returned, or delete a mistaken entry</li>
         </ul>
     </div>
 </div>
