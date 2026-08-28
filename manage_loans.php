@@ -47,6 +47,7 @@ include('includes/nav.php');
                         <th scope="col">Due back</th>
                         <th scope="col">Status</th>
                         <th scope="col">Logged by</th>
+                        <th scope="col">Notes</th>
                         <th scope="col">&nbsp;</th>
                         <th scope="col">&nbsp;</th>
                     </tr>
@@ -89,6 +90,7 @@ include('includes/nav.php');
                             <td><?= htmlspecialchars($loan['due_back']) ?></td>
                             <td><?= $status ?></td>
                             <td><?= htmlspecialchars($loan['logged_by_name'] ?? '—') ?></td>
+                            <td><?= htmlspecialchars($loan['notes'] ?? '') ?></td>
                             <td>
                                 <?php if (!$loan['returned_date']): ?>
                                 <a href="return_loan.php?id=<?= (int) $loan['id'] ?>">

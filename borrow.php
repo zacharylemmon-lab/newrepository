@@ -17,7 +17,7 @@ include('includes/nav.php');
         <div class="col-sm-3"></div>
         <div class="col-sm-6">
             <h2 class="pt-5">Log a loan</h2>
-            <p style="color: #5e646d;"> Please use First and Last names for Author and Borrower </p>
+            <p style="color: #5e646d;"> Please use First and Last names for the Author and Borrower </p>
             
             <?php if ($errors): ?>
             <div class="alert alert-danger" role="alert">
@@ -44,6 +44,11 @@ include('includes/nav.php');
                     <label for="borrower_name" class="form-label">Borrower</label>
                     <input type="text" class="form-control" id="borrower_name" name="borrower_name"
                            value="<?= htmlspecialchars($old['borrower_name'] ?? '') ?>">
+                </div>
+                <div class="mb-3">
+                    <label for="notes" class="form-label">Notes</label>
+                    <input type="text" class="form-control" id="notes" name="notes"
+                           value="<?= htmlspecialchars($old['notes'] ?? '') ?>">
                 </div>
                 <div class="mb-3">
                     <label for="due_back" class="form-label">Due back</label>
